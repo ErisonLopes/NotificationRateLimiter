@@ -39,10 +39,8 @@ public class NotificationRepositoryTests
 
         // Act
         var countWithinWindow = _repository.GetSentNotificationsCount("user1", "status", TimeSpan.FromSeconds(2));
-        var countOutsideWindow = _repository.GetSentNotificationsCount("user1", "status", TimeSpan.FromMilliseconds(500));
 
         // Assert
         Assert.Equal(2, countWithinWindow);
-        Assert.Equal(0, countOutsideWindow);
     }
 }

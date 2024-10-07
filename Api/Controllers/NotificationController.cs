@@ -1,5 +1,6 @@
 ﻿using Application.Service;
 using Domain.Entities;
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -8,9 +9,9 @@ namespace Api.Controllers;
 [Route("[controller]")]
 public class NotificationController : Controller
 {
-    private readonly NotificationService _notificationService;
+    private readonly INotificationService _notificationService;
 
-    public NotificationController(NotificationService notificationService)
+    public NotificationController(INotificationService notificationService)
     {
         _notificationService = notificationService;
     }

@@ -1,7 +1,9 @@
 ﻿using Application.Service;
+using Castle.Core.Logging;
 using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.External;
+using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace UnitTests.Application
@@ -10,6 +12,7 @@ namespace UnitTests.Application
     {
         private readonly Mock<INotificationRepository> _notificationRepositoryMock;
         private readonly Mock<IGateway> _gatewayMock;
+        private readonly Mock<ILogger<NotificationService>> _logger;
         private readonly NotificationService _notificationService;
         private readonly RateLimitService _rateLimitService;
 
@@ -18,7 +21,8 @@ namespace UnitTests.Application
             _notificationRepositoryMock = new Mock<INotificationRepository>();
             _gatewayMock = new Mock<IGateway>();
             _rateLimitService = new RateLimitService();
-            _notificationService = new NotificationService(_notificationRepositoryMock.Object, _rateLimitService, _gatewayMock.Object);
+            _logger = new Mock<ILogger<NotificationService>>();
+            _notificationService = new NotificationService(_notificationRepositoryMock.Object, _rateLimitService, _gatewayMock.Object, _logger.Object);
         }
 
         [Fact]
